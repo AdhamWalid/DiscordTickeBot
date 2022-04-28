@@ -4,14 +4,13 @@ const client = new Discord.Client({intents: 32767})
 const db = require('quick.db')
 const discordTranscripts = require('discord-html-transcripts');
 
-
 const config = {
-  staff : "",
-  category : "",
-  owner : "",
-  log :"",
-  token : process.env.token,
-  prefix : ""
+  "staff" : "957354973484712086",
+  "category" : "957355033383555092",
+  "owner" : "602758334520623125",
+  "log" :"968582450433363988",
+  "token" : "OTY4NTkwNTg1OTIzNTEwMzMy.YmhERw.iOQPECs4vCPn5bt1B0H_GbS6eEw",
+  "prefix" : "!",
 }
 
 
