@@ -111,7 +111,7 @@ client.on('messageCreate' , async (message) => {
         });
 
         let userr = client.users.cache.get(interaction.channel.topic);
-        interaction.channel.permissionOverwrites.edit(userr.id, {
+        interaction.channel.permissionOverwrites.edit(userr, {
           SEND_MESSAGES: false,
           VIEW_CHANNEL: false,
           ATTACH_FILES: false
