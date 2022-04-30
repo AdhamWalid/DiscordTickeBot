@@ -3,17 +3,37 @@ const {MessageActionRow , MessageButton , MessageEmbed} = require('discord.js')
 const client = new Discord.Client({intents: 32767})
 const db = require('quick.db')
 const discordTranscripts = require('discord-html-transcripts');
-
+const DiscordModal = require('discord-modal')
+DiscordModal(client)
 const config = {
-  "staff" : "957354973484712086",
-  "category" : "957355033383555092",
+  "staff" : "968953513210175518",
+  "category" : "968953858841796688",
   "owner" : "602758334520623125",
-  "log" :"968582450433363988",
-  "token" : "OTY4NTkwNTg1OTIzNTEwMzMy.YmhERw.iOQPECs4vCPn5bt1B0H_GbS6eEw",
+  "log" :"968966338343231518",
+  "token" : "OTY5NzI4MzEzNjc1MzcwNTE2.Ymxn3g.68FsqCskiondEo2QOP9TOSF20U0",
   "prefix" : "!",
 }
 
+client.on('ready' , ()=> {
+  console.log(client.user.tag + ' is Alive')
+})
 
+
+client.on('messageCreate' , async (message) => {
+  if (message.content.startsWith(config.prefix + 'faq')){
+    let embed = new Discord.MessageEmbed()
+    .setAuthor(`Reticket Help Menu`)
+    .addField(`What's The Bots Prefix?` , `the bot's Default prefix is **${config.prefix}**`)
+    .addField(`What's The Bots Prefix?` , `the bot's Default prefix is **${config.prefix}**`)
+    .addField(`What's The Bots Prefix?` , `the bot's Default prefix is **${config.prefix}**`)
+    .addField(`What's The Bots Prefix?` , `the bot's Default prefix is **${config.prefix}**`)
+    .addField(`What's The Bots Prefix?` , `the bot's Default prefix is **${config.prefix}**`)
+    .addField(`What's The Bots Prefix?` , `the bot's Default prefix is **${config.prefix}**`)
+    .addField(`What's The Bots Prefix?` , `the bot's Default prefix is **${config.prefix}**`)
+    .addField(`What's The Bots Prefix?` , `the bot's Default prefix is **${config.prefix}**`)
+    message.reply({embeds : [embed]})
+  }
+})
 client.on('messageCreate' , async (message) => {
     if (message.content === config.prefix + 'send-panel'){
       if (!message.author.id === config.owner) return;
@@ -81,7 +101,19 @@ client.on('messageCreate' , async (message) => {
           new MessageButton()
             .setLabel('Close Ticket')
             .setStyle('DANGER')
-            .setCustomId("close_btn"),
+            .setCustomId("close_btn")
+            .setEmoji('🔒'),
+            new MessageButton()
+            .setLabel('Rename Ticket')
+            .setStyle('DANGER')
+            .setCustomId("rename_btn")
+            .setEmoji('⚙')
+            ,
+            new MessageButton()
+            .setLabel('Claim Ticket')
+            .setStyle('PRIMARY')
+            .setCustomId("claim_btn")
+            .setEmoji('📍')
 
             );
 
@@ -146,12 +178,76 @@ client.on('messageCreate' , async (message) => {
     if (interaction.isButton()){
       if (interaction.customId === 'delete_btn'){
         if (!interaction.member.roles.cache.has(config.staff)) return interaction.reply("INVALID PERMISSION.");
-        interaction.reply("Deleting..")
         await interaction.channel.delete()
 
       }
     }
   })
 
+  client.on('interactionCreate' , async (interaction) => {
+    if (interaction.isButton()){
+      if (interaction.customId === 'rename_btn'){
+        if (!interaction.member.roles.cache.has(config.staff)) return interaction.reply("INVALID PERMISSION.");
+          
+        const textinput = new DiscordModal.TextInput()
+        .setCustomId("change_ticket_name")
+        .setTitle("Ticket Rename")
+        .addComponents(
+          new DiscordModal.TextInputField()
+          .setLabel("New Name?")
+          .setStyle("short")
+          .setCustomId("ask_1")
+          .setRequired(true)
+          )
+          client.TextInputs.open(interaction, textinput) 
 
+      }
+    }
+  })
+
+
+  client.on("interactionTextInput",async(interaction)=>{
+    if(interaction.customId == 'change_ticket_name'){
+      await interaction.deferReply()
+      let embed = new Discord.MessageEmbed()
+      .setColor('GREEN')
+      .setAuthor(`Changed Ticket name to => ${interaction.fields[0].value}`) 
+       await interaction.editReply({embeds:[embed]})
+       await interaction.channel.setName(interaction.fields[0].value)
+    }
+   })
+
+
+   client.on('interactionCreate' , async (interaction) => {
+    if (interaction.isButton()){
+      if (interaction.customId === 'claim_btn'){
+        if (!interaction.member.roles.cache.has(config.staff)) return interaction.reply("INVALID PERMISSION.");
+            let embed = new Discord.MessageEmbed()
+            .setAuthor(`Ticket Claimed!`)
+            .addField(`Claimed` , `${interaction.user}`)
+            .setColor('RED')
+        interaction.channel.send({embeds : [embed]})
+        const row = new MessageActionRow()
+        .addComponents(
+          new MessageButton()
+            .setLabel('Close Ticket')
+            .setStyle('DANGER')
+            .setCustomId("close_btn"),
+            new MessageButton()
+            .setLabel('Rename Ticket')
+            .setStyle('PRIMARY')
+            .setCustomId("rename_btn"),
+            new MessageButton()
+            .setLabel('Claim Ticket')
+            .setStyle('SECONDARY')
+            .setCustomId("claim_btn")
+            .setDisabled(true)
+            );
+
+            interaction.update({components : [row]})
+      }
+
+    }
+  })
+   
 client.login(config.token)
