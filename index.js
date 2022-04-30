@@ -10,7 +10,7 @@ const config = {
   "category" : "968953858841796688",
   "owner" : "602758334520623125",
   "log" :"968966338343231518",
-  "token" : "OTY5NzI4MzEzNjc1MzcwNTE2.Ymxn3g.68FsqCskiondEo2QOP9TOSF20U0",
+  "token" : "OTQ1NzY1MTUzOTY0Njk1NTUy.YhU6cA.u3UxmOHzL1XZ_H-pi2YiAV52XEc",
   "prefix" : "!",
 }
 
