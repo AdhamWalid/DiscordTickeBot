@@ -12,7 +12,7 @@ const config = {
   "log" :"968582450433363988",
   "token" : "OTY4NTkwNTg1OTIzNTEwMzMy.YmhERw.iOQPECs4vCPn5bt1B0H_GbS6eEw",
   "prefix" : "!",
-}
+} 
 
 client.on('ready' , ()=> {
   console.log(client.user.tag + ' is Alive')
