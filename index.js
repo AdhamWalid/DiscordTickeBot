@@ -6,10 +6,10 @@ const discordTranscripts = require('discord-html-transcripts');
 const DiscordModal = require('discord-modal')
 DiscordModal(client)
 const config = {
-  "staff" : "968953513210175518",
-  "category" : "968953858841796688",
-  "owner" : "602758334520623125",
-  "log" :"968966338343231518",
+  "staff" : "957354973484712086",
+  "category" : "957355033383555092",
+  "owner" : "600341504682360863",
+  "log" :"968582450433363988",
   "token" : "OTQ1NzY1MTUzOTY0Njk1NTUy.YhU6cA.u3UxmOHzL1XZ_H-pi2YiAV52XEc",
   "prefix" : "!",
 }
@@ -19,21 +19,7 @@ client.on('ready' , ()=> {
 })
 
 
-client.on('messageCreate' , async (message) => {
-  if (message.content.startsWith(config.prefix + 'faq')){
-    let embed = new Discord.MessageEmbed()
-    .setAuthor(`Reticket Help Menu`)
-    .addField(`What's The Bots Prefix?` , `the bot's Default prefix is **${config.prefix}**`)
-    .addField(`What's The Bots Prefix?` , `the bot's Default prefix is **${config.prefix}**`)
-    .addField(`What's The Bots Prefix?` , `the bot's Default prefix is **${config.prefix}**`)
-    .addField(`What's The Bots Prefix?` , `the bot's Default prefix is **${config.prefix}**`)
-    .addField(`What's The Bots Prefix?` , `the bot's Default prefix is **${config.prefix}**`)
-    .addField(`What's The Bots Prefix?` , `the bot's Default prefix is **${config.prefix}**`)
-    .addField(`What's The Bots Prefix?` , `the bot's Default prefix is **${config.prefix}**`)
-    .addField(`What's The Bots Prefix?` , `the bot's Default prefix is **${config.prefix}**`)
-    message.reply({embeds : [embed]})
-  }
-})
+
 client.on('messageCreate' , async (message) => {
     if (message.content === config.prefix + 'send-panel'){
       if (!message.author.id === config.owner) return;
@@ -249,5 +235,5 @@ client.on('messageCreate' , async (message) => {
 
     }
   })
-   
+  
 client.login(config.token)
