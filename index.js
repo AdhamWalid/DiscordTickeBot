@@ -22,6 +22,7 @@ client.on('ready' , ()=> {
 
 client.on('messageCreate' , async (message) => {
     if (message.content === config.prefix + 'send-panel'){
+      
       if (!message.author.id === config.owner) return;
       let embed = new Discord.MessageEmbed()
       .setAuthor({name : `${message.guild.name}` , iconURL : message.guild.iconURL({dynamics : true})})
