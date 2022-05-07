@@ -62,7 +62,7 @@ client.on('messageCreate' , async (message) => {
           parent : config.category,
       }).then((newChannel) => {
 
- newChannel.permissionOverwrites.edit(interaction.guild.roles.everyone.id, {
+        newChannel.permissionOverwrites.edit(interaction.guild.roles.everyone.id, {
           SEND_MESSAGES: false,
           VIEW_CHANNEL: false,
           ATTACH_FILES: false
@@ -86,6 +86,7 @@ client.on('messageCreate' , async (message) => {
         const row = new MessageActionRow()
         .addComponents(
           new MessageButton()
+          
             .setLabel('Close Ticket')
             .setStyle('DANGER')
             .setCustomId("close_btn")
